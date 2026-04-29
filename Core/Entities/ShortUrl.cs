@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Entities;
+﻿namespace Core.Entities;
 
 public class ShortUrl
 {
-    public int Id { get; private set; }
-    public string? OriginalUrl { get; private set; }
-    public string? ShortCode { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public string? CreatedByUserId { get; private set; }
+    public Guid Id { get; set; }
+    public string? OriginalUrl { get; set; }
+    public string? ShortCode { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string? CreatedByUserId { get; set; }
 }
