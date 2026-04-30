@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Infrastructure.Data;
-
-using Core.Entities;
+﻿using Core.Entities;
+using Infrastructure.Entities;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
+namespace Infrastructure.Data;
 
 public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
@@ -16,6 +13,8 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<ShortUrl> ShortUrls => Set<ShortUrl>();
     public DbSet<AlgorithmInfo> Infos => Set<AlgorithmInfo>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
