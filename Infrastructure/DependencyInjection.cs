@@ -35,6 +35,7 @@ public static class DependencyInjection
         // Services
         services.AddScoped<IShortUrlService, ShortUrlService>();
         services.AddScoped<IAlgorithmInfoService, AlgorithmInfoService>();
+        services.AddScoped<ITokenService, TokenService>();
 
         // Memory
         services.AddMemoryCache();
