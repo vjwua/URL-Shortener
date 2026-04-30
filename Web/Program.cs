@@ -1,4 +1,7 @@
 using Infrastructure;
+using Infrastructure.Data;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 public class Program
 {
@@ -23,6 +26,15 @@ public class Program
         });
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var adminEmail = builder.Configuration["Identity:DefaultAdmin:Email"] ?? "admin@shurl.com";
+            var adminPassword = builder.Configuration["Identity:DefaultAdmin:Password"] ?? "Admin123!";
+            await DataSeeder.SeedAsync(userManager, roleManager, adminEmail, adminPassword);
+        }
 
         if (!app.Environment.IsDevelopment())
         {
