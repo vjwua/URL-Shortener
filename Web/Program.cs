@@ -12,6 +12,16 @@ public class Program
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("ReactApp", policy =>
+            {
+                policy.WithOrigins("http://localhost:5173") //Frontend
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
@@ -23,6 +33,8 @@ public class Program
         app.UseHttpsRedirection();
         app.UseRouting();
 
+        app.UseCors("ReactApp");
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapStaticAssets();
