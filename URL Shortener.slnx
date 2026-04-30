@@ -2,5 +2,9 @@
   <Project Path="Core/Core.csproj" Id="35393065-014c-427c-a49c-2faafa0e7a6a" />
   <Project Path="Infrastructure/Infrastructure.csproj" Id="13ed4c7f-daa3-4255-8aac-6b0852e867cd" />
   <Project Path="Tests/Tests.csproj" />
-  <Project Path="Web/Web.csproj" />
+  <Project Path="WebReact/webreact.client/webreact.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="WebReact/WebReact.Server/WebReact.Server.csproj" Id="09676104-ef1f-46ef-bde4-9251aabd1ebf" />
 </Solution>
