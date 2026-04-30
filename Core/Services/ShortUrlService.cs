@@ -51,6 +51,7 @@ public class ShortUrlService(
 
         var shortUrl = new ShortUrl
         {
+            OriginalUrl = dto.OriginalUrl,
             ShortCode = shortCode.Result,
             CreatedByUserId = userId,
             CreatedAt = DateTime.UtcNow

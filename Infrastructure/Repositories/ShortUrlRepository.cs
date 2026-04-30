@@ -34,7 +34,8 @@ public class ShortUrlRepository(AppDbContext context) : IShortUrlRepository
 
     public async Task DeleteAllAsync()
     {
-        await context.ShortUrls.ExecuteDeleteAsync();
+        var all = await context.ShortUrls.ToListAsync();
+        context.ShortUrls.RemoveRange(all);
     }
 
     public async Task<bool> ExistsAsync(string shortCode)
