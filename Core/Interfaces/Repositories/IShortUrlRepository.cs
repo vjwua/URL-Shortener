@@ -10,5 +10,6 @@ public interface IShortUrlRepository
     Task AddAsync(ShortUrl shortUrl);
     Task DeleteAsync(ShortUrl shortUrl);
     Task DeleteAllAsync();
+    Task<bool> ExistsAsync(string shortCode);
     Task SaveChangesAsync();
 }

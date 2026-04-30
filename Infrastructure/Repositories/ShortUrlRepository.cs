@@ -37,6 +37,11 @@ public class ShortUrlRepository(AppDbContext context) : IShortUrlRepository
         await context.ShortUrls.ExecuteDeleteAsync();
     }
 
+    public async Task<bool> ExistsAsync(string shortCode)
+    {
+        return await context.ShortUrls.AnyAsync(x => x.ShortCode == shortCode);
+    }
+
     public async Task SaveChangesAsync()
     {
         await context.SaveChangesAsync();

@@ -1,15 +1,18 @@
 ﻿using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Services;
+using Core.Validators;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using System.Text;
 
 namespace Infrastructure;
@@ -32,6 +35,13 @@ public static class DependencyInjection
         // Services
         services.AddScoped<IShortUrlService, ShortUrlService>();
         services.AddScoped<IAlgorithmInfoService, AlgorithmInfoService>();
+
+        // Memory
+        services.AddMemoryCache();
+
+        // Validators
+        services.AddValidatorsFromAssemblyContaining<CreateShortUrlValidator>();
+        services.AddFluentValidationAutoValidation();
 
         // Identity
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
