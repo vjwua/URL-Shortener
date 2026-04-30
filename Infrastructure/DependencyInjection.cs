@@ -21,7 +21,9 @@ public static class DependencyInjection
     {
         // Database
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("Default")));
+            options.UseSqlServer(
+                configuration.GetConnectionString("DefaultConnection")
+            ));
 
         // Repositories
         services.AddScoped<IShortUrlRepository, ShortUrlRepository>();
