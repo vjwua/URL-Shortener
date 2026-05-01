@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.DTOs.AlgorithmInfo;
+using Core.DTOs.ShortUrl;
 using Core.Entities;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
@@ -18,6 +19,13 @@ public class AlgorithmInfoService(
             throw new KeyNotFoundException("Algorithm description was not found.");
 
         return mapper.Map<AlgorithmInfoDTO>(info);
+    }
+
+    public async Task CreateAsync(AlgorithmInfoDTO dto)
+    {
+        var info = mapper.Map<AlgorithmInfo>(dto);
+        await algorithmInfoRepository.AddAsync(info);
+        await algorithmInfoRepository.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(AlgorithmInfoDTO dto)

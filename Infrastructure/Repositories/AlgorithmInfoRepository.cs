@@ -12,6 +12,11 @@ public class AlgorithmInfoRepository(AppDbContext context) : IAlgorithmInfoRepos
         return await context.Infos.FirstOrDefaultAsync();
     }
 
+    public Task AddAsync(AlgorithmInfo algorithmInfo)
+    {
+        context.Infos.Add(algorithmInfo);
+        return Task.CompletedTask;
+    }
     public async Task UpdateAsync(AlgorithmInfo algorithmInfo)
     {
         context.Infos.Update(algorithmInfo);

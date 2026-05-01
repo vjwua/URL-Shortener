@@ -11,5 +11,8 @@ public class AlgorithmInfoMapping : Profile
         CreateMap<AlgorithmInfo, AlgorithmInfoDTO>()
             .ForMember(alg => alg.Id, opt => opt.MapFrom(alg => alg.Id))
             .ForMember(alg => alg.Description, opt => opt.MapFrom(alg => alg.Description));
+        CreateMap<AlgorithmInfoDTO, AlgorithmInfo>()
+            .ForMember(alg => alg.Id, opt => opt.MapFrom(alg => alg.Id))
+            .ForMember(alg => alg.Description, opt => opt.MapFrom(alg => alg.Description));
     }
 }

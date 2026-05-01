@@ -24,6 +24,21 @@ public class AlgorithmInfoController(IAlgorithmInfoService algorithmInfoService)
         }
     }
 
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Create([FromBody] AlgorithmInfoDTO dto)
+    {
+        try
+        {
+            await algorithmInfoService.CreateAsync(dto);
+            return Created();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpPut]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update([FromBody] AlgorithmInfoDTO dto)
