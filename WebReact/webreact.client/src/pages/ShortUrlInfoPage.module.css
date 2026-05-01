@@ -1,0 +1,102 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.backButton {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-tertiary);
+    margin-bottom: 1.5rem;
+}
+
+.card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.75rem;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+}
+
+.error {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    border: 0.5px solid var(--color-border-danger);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+}
+
+.loading {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.fieldList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fieldLabel {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.fieldValue {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    word-break: break-all;
+}
+
+.fieldValueMono {
+    font-size: 14px;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+}
+
+.fieldValueLink {
+    font-size: 14px;
+    color: var(--color-text-info);
+    word-break: break-all;
+    text-decoration: none;
+}
+
+    .fieldValueLink:hover {
+        text-decoration: underline;
+    }
+
+.divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 0.25rem 0;
+}
+
+.footer {
+    margin-top: 1.75rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteButton {
+    font-size: 13px;
+    color: var(--color-text-danger);
+    border-color: var(--color-border-danger);
+}

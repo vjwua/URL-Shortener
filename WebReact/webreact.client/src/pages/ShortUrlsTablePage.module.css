@@ -1,0 +1,125 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 4px 0 0;
+}
+
+.deleteAllButton {
+    font-size: 13px;
+    color: var(--color-text-danger);
+    border-color: var(--color-border-danger);
+}
+
+.error {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    border: 0.5px solid var(--color-border-danger);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.createForm {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.createInput {
+    flex: 1;
+}
+
+.tableWrapper {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.emptyState {
+    padding: 3rem;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px;
+}
+
+.th {
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+
+.tr {
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+    .tr:not(:first-child) {
+        border-top: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .tr:hover {
+        background: var(--color-background-secondary);
+    }
+
+.tdUrl {
+    padding: 12px 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text-info);
+}
+
+.tdCode {
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.tdDate {
+    padding: 12px 16px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+}
+
+.tdAction {
+    padding: 12px 16px;
+    text-align: right;
+}
+
+.deleteButton {
+    font-size: 13px;
+    padding: 4px 10px;
+    color: var(--color-text-danger);
+    border-color: var(--color-border-danger);
+}

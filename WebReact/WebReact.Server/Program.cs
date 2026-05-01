@@ -2,6 +2,7 @@ using Infrastructure;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi;
 
 public class Program
 {
@@ -12,19 +13,36 @@ public class Program
         builder.Services.AddControllers();
 
         builder.Services.AddOpenApi();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header
+            });
+
+            options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecuritySchemeReference("bearer", document)] = []
+            });
+        });
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        //builder.Services.AddCors(options =>
-        //{
-        //    options.AddPolicy("ReactApp", policy =>
-        //    {
-        //        policy.WithOrigins("http://localhost:5173") //Frontend
-        //              .AllowAnyHeader()
-        //              .AllowAnyMethod();
-        //    });
-        //});
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("ReactApp", policy =>
+            {
+                policy.WithOrigins("http://localhost:64977") //Frontend
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
 
         var app = builder.Build();
 
@@ -44,6 +62,8 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();

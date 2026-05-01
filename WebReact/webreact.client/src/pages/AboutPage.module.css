@@ -1,0 +1,81 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.75rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.editButton {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-tertiary);
+}
+
+.description {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.textarea {
+    width: 100%;
+    min-height: 180px;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.editActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+.cancelButton {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-tertiary);
+}
+
+.saveButton {
+    font-size: 13px;
+}
+
+.error {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    border: 0.5px solid var(--color-border-danger);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.loading {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    padding: 3rem 0;
+    text-align: center;
+}
