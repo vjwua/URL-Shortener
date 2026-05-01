@@ -48,7 +48,7 @@ export default function ShortUrlInfoPage() {
             minute: '2-digit'
         });
 
-    const shortLink = `${window.location.origin}/api/shorturl/redirect/${url?.shortCode}`;
+    const shortLink = `${window.location.origin}/api/shorturl/reroute/${url?.shortCode}`;
 
     return (
         <div className={styles.container}>
