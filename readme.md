@@ -1,6 +1,6 @@
 ﻿## URL Shortener
 
-![Screenshot](./shorturls.png){ width=50% }
+![Screenshot](./shorturls.png)
 
 Project to generate short links from any URLs and send them to anyone who needs it.
 
