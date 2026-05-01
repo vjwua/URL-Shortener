@@ -1,10 +1,6 @@
 ﻿using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Web.Controllers;
 
@@ -13,6 +9,7 @@ namespace Web.Controllers;
 public class AccountController(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager,
+    ITokenService tokenService,
     IConfiguration configuration) : ControllerBase
 {
     [HttpPost("register")]
@@ -41,34 +38,13 @@ public class AccountController(
         if (!result.Succeeded)
             return Unauthorized("Invalid credentials.");
 
-        var token = await GenerateJwtToken(user);
-        return Ok(new { token });
-    }
+        var accessToken = await tokenService.GenerateAccessTokenAsync(user);
+        var refreshToken = await tokenService.GenerateRefreshTokenAsync(user);
 
-    private async Task<string> GenerateJwtToken(ApplicationUser user)
-    {
-        var roles = await userManager.GetRolesAsync(user);
-
-        var claims = new List<Claim>
+        return Ok(new AuthResponseDTO
         {
-            new(ClaimTypes.NameIdentifier, user.Id),
-            new(ClaimTypes.Email, user.Email!),
-            new(ClaimTypes.Name, user.UserName!)
-        };
-
-        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var token = new JwtSecurityToken(
-            issuer: configuration["Jwt:Issuer"],
-            audience: configuration["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(8),
-            signingCredentials: creds
-        );
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+            AccessToken = accessToken,
+            RefreshToken = refreshToken
+        });
     }
 }
