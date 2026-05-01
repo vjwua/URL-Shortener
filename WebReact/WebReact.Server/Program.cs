@@ -12,6 +12,12 @@ public class Program
 
         builder.Services.AddControllers();
 
+        builder.Services.AddLogging(logging =>
+        {
+            logging.AddConsole();
+            logging.SetMinimumLevel(LogLevel.Debug);
+        });
+
         builder.Services.AddOpenApi();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
@@ -34,15 +40,15 @@ public class Program
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy("ReactApp", policy =>
-            {
-                policy.WithOrigins("http://localhost:64977") //Frontend
-                      .AllowAnyHeader()
-                      .AllowAnyMethod();
-            });
-        });
+        //builder.Services.AddCors(options =>
+        //{
+        //    options.AddPolicy("ReactApp", policy =>
+        //    {
+        //        policy.WithOrigins("http://localhost:64977") //Frontend
+        //              .AllowAnyHeader()
+        //              .AllowAnyMethod();
+        //    });
+        //});
 
         var app = builder.Build();
 
@@ -67,6 +73,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseRouting();
+
+        app.UseCors("ReactApp");
 
         app.UseAuthentication();
         app.UseAuthorization();

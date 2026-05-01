@@ -50,4 +50,4 @@ public static class DataSeeder
         if (result.Succeeded)
             await userManager.AddToRoleAsync(admin, RoleNames.Admin);
     }
-}
+}   

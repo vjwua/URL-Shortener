@@ -45,7 +45,7 @@ public static class DependencyInjection
         services.AddFluentValidationAutoValidation();
 
         // Identity
-        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        services.AddIdentityCore<ApplicationUser>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -54,7 +54,10 @@ public static class DependencyInjection
                 options.Password.RequiredLength = 8;
                 options.User.RequireUniqueEmail = true;
             })
-            .AddEntityFrameworkStores<AppDbContext>();
+            .AddRoles<IdentityRole>()
+            .AddSignInManager<SignInManager<ApplicationUser>>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
         // JWT
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -69,7 +72,26 @@ public static class DependencyInjection
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                        Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        Console.WriteLine($"TOKEN RECEIVED: {context.Token ?? "NULL"}");
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"AUTH FAILED: {context.Exception.Message}");
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = context =>
+                    {
+                        Console.WriteLine($"CHALLENGE: {context.Error} - {context.ErrorDescription}");
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
